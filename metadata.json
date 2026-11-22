@@ -1,0 +1,8 @@
+{
+  "name": "AI CareerPilot",
+  "description": "Your Career. Your Skills. Your Future. An intelligent career development platform for college students, fresh graduates, and job seekers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Private career profile and preferences for an authenticated user.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "displayName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "email": { "type": "string", "format": "email", "maxLength": 200 },
+        "educationLevel": { "type": "string", "maxLength": 120 },
+        "degree": { "type": "string", "maxLength": 120 },
+        "branch": { "type": "string", "maxLength": 120 },
+        "skills": { "type": "array", "description": "Up to 40 technical skills." },
+        "interests": { "type": "array", "description": "Up to 20 career interests." },
+        "careerGoals": { "type": "string", "maxLength": 1000 },
+        "experienceLevel": { "type": "string", "enum": ["Student", "Fresh Graduate", "0-2 Years", "2+ Years"] },
+        "targetRole": { "type": "string", "maxLength": 120 },
+        "plan": { "type": "string", "enum": ["free", "pro", "premium"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "displayName", "email", "educationLevel", "degree", "branch", "skills", "interests", "careerGoals", "experienceLevel", "targetRole", "plan", "createdAt", "updatedAt"]
+    },
+    "CareerAnalysis": {
+      "title": "CareerAnalysis",
+      "description": "AI Career Advisor recommendation report owned by a user.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "targetInputSummary": { "type": "string", "maxLength": 600 },
+        "recommendedPaths": { "type": "array" },
+        "requiredSkills": { "type": "array" },
+        "recommendedLanguages": { "type": "array" },
+        "opportunities": { "type": "array" },
+        "roadmapPreview": { "type": "string", "maxLength": 4000 },
+        "explanation": { "type": "string", "maxLength": 4000 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "targetInputSummary", "recommendedPaths", "requiredSkills", "recommendedLanguages", "opportunities", "roadmapPreview", "explanation", "createdAt"]
+    },
+    "ResumeAnalysis": {
+      "title": "ResumeAnalysis",
+      "description": "AI Resume Analyzer structured evaluation for an uploaded PDF resume.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "fileName": { "type": "string", "maxLength": 200 },
+        "targetRole": { "type": "string", "maxLength": 120 },
+        "structureScore": { "type": "number" },
+        "atsReadabilityScore": { "type": "number" },
+        "extractedSkills": { "type": "array" },
+        "missingSkills": { "type": "array" },
+        "strengths": { "type": "array" },
+        "improvements": { "type": "array" },
+        "professionalSummary": { "type": "string", "maxLength": 2000 },
+        "projectSuggestions": { "type": "array" },
+        "atsFeedback": { "type": "string", "maxLength": 2000 },
+        "grammarNotes": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "fileName", "targetRole", "structureScore", "atsReadabilityScore", "extractedSkills", "missingSkills", "strengths", "improvements", "professionalSummary", "projectSuggestions", "atsFeedback", "grammarNotes", "createdAt"]
+    },
+    "SkillGapReport": {
+      "title": "SkillGapReport",
+      "description": "Role-based skill gap comparison owned by a user.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "targetRole": { "type": "string", "maxLength": 120 },
+        "existingSkills": { "type": "array" },
+        "missingSkills": { "type": "array" },
+        "matchPercentage": { "type": "number" },
+        "recommendations": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "targetRole", "existingSkills", "missingSkills", "matchPercentage", "recommendations", "createdAt"]
+    },
+    "LearningRoadmap": {
+      "title": "LearningRoadmap",
+      "description": "Personalized multi-stage learning roadmap with topic completion tracking.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "targetRole": { "type": "string", "maxLength": 120 },
+        "title": { "type": "string", "maxLength": 180 },
+        "beginnerTopics": { "type": "array" },
+        "intermediateTopics": { "type": "array" },
+        "advancedTopics": { "type": "array" },
+        "weeklyTargets": { "type": "array" },
+        "practicalProjects": { "type": "array" },
+        "resources": { "type": "array" },
+        "completedTopicIds": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "targetRole", "title", "beginnerTopics", "intermediateTopics", "advancedTopics", "weeklyTargets", "practicalProjects", "resources", "completedTopicIds", "createdAt", "updatedAt"]
+    },
+    "InterviewSession": {
+      "title": "InterviewSession",
+      "description": "Interview practice session and mock evaluation summary.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "role": { "type": "string", "maxLength": 120 },
+        "difficulty": { "type": "string", "enum": ["Beginner", "Intermediate", "Advanced"] },
+        "mode": { "type": "string", "enum": ["Practice Q&A", "Mock Interview"] },
+        "questionCount": { "type": "number" },
+        "averageScore": { "type": "number" },
+        "summaryFeedback": { "type": "string", "maxLength": 2000 },
+        "questions": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "role", "difficulty", "mode", "questionCount", "averageScore", "summaryFeedback", "questions", "createdAt"]
+    },
+    "SavedJob": {
+      "title": "SavedJob",
+      "description": "Job or internship listing saved by the user.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "externalId": { "type": "string", "maxLength": 200 },
+        "title": { "type": "string", "maxLength": 200 },
+        "company": { "type": "string", "maxLength": 160 },
+        "location": { "type": "string", "maxLength": 160 },
+        "category": { "type": "string", "enum": ["Internship", "Full-Time"] },
+        "experienceLevel": { "type": "string", "maxLength": 80 },
+        "applyUrl": { "type": "string", "maxLength": 500 },
+        "source": { "type": "string", "maxLength": 80 },
+        "postedAt": { "type": "string", "maxLength": 80 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "externalId", "title", "company", "location", "category", "experienceLevel", "applyUrl", "source", "postedAt", "createdAt"]
+    },
+    "UserActivity": {
+      "title": "UserActivity",
+      "description": "Chronological activity log for dashboard analytics.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "type": { "type": "string", "enum": ["career_advisor", "resume_analysis", "skill_gap", "roadmap", "interview", "job_saved", "profile_updated"] },
+        "title": { "type": "string", "maxLength": 200 },
+        "detail": { "type": "string", "maxLength": 400 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "type", "title", "detail", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Authenticated user's private career profile."
+    },
+    "/careerAnalyses/{analysisId}": {
+      "schema": { "$ref": "#/entities/CareerAnalysis" },
+      "description": "User's saved AI Career Advisor analyses."
+    },
+    "/resumeAnalyses/{resumeId}": {
+      "schema": { "$ref": "#/entities/ResumeAnalysis" },
+      "description": "User's saved AI Resume Analyzer evaluations."
+    },
+    "/skillGapReports/{reportId}": {
+      "schema": { "$ref": "#/entities/SkillGapReport" },
+      "description": "User's saved Skill Gap reports."
+    },
+    "/learningRoadmaps/{roadmapId}": {
+      "schema": { "$ref": "#/entities/LearningRoadmap" },
+      "description": "User's personalized learning roadmaps and progress."
+    },
+    "/interviewSessions/{sessionId}": {
+      "schema": { "$ref": "#/entities/InterviewSession" },
+      "description": "User's interview preparation sessions and evaluations."
+    },
+    "/savedJobs/{savedJobId}": {
+      "schema": { "$ref": "#/entities/SavedJob" },
+      "description": "User's bookmarked legitimate job/internship listings."
+    },
+    "/activities/{activityId}": {
+      "schema": { "$ref": "#/entities/UserActivity" },
+      "description": "User's recorded learning and career actions for real analytics."
+    }
+  }
+}
